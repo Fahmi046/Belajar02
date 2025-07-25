@@ -6,7 +6,7 @@
 
 
     <div class="text-base text-gray-500">
-      <a href="#">{{ $post['author'] }}</a> | 1 Januari 2025
+      <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->diffForhumans() }}
     </div>
     <p class=" my-4 font-light ">
      {{ $post['body'] }}
