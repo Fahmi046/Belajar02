@@ -18,9 +18,9 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'posts_author_id'
             );
-            $table->foreignId('categories_id')->constrained(
+            $table->foreignId('category_id')->constrained(
                 table: 'categories',
-                indexName: 'posts_categories_id'
+                indexName: 'posts_category_id'
             );
             $table->string('slug')->unique();
             $table->text('body');
