@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            PbFSystemSeeder::class,
         ]);
         Post::factory(100)->recycle([
             Category::all(),
