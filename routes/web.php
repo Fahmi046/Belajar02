@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -33,6 +35,12 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact']);
 });
 
+Route::get('/contact', function (Post $post) {
+    return view('post', ['title' => 'Single Post', 'post' => $post]);
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');

@@ -112,9 +112,9 @@ class PbFSystemSeeder extends Seeder
                 foreach ($po->items as $poItem) {
                     // Cek apakah batch sudah ada untuk produk ini (dari penerimaan sebelumnya)
                     $existingBatch = Batch::where('product_id', $poItem->product_id)
-                                          ->where('batch_number', 'LIKE', 'B%') // Ambil batch yang dibuat oleh factory
-                                          ->inRandomOrder()
-                                          ->first();
+                        ->where('batch_number', 'LIKE', 'B%') // Ambil batch yang dibuat oleh factory
+                        ->inRandomOrder()
+                        ->first();
 
                     $batchId = null;
                     $batchNumber = fake()->bothify('B???-###??');
@@ -197,9 +197,9 @@ class PbFSystemSeeder extends Seeder
 
                     // Ambil batch yang tersedia dari produk ini (FIFO/FEFO sederhana)
                     $availableBatches = Batch::where('product_id', $product->id)
-                                            ->where('current_stock', '>', 0)
-                                            ->orderBy('expiry_date', 'asc') // Prioritaskan FEFO
-                                            ->get();
+                        ->where('current_stock', '>', 0)
+                        ->orderBy('expiry_date', 'asc') // Prioritaskan FEFO
+                        ->get();
 
                     $remainingToIssue = $quantityIssued;
                     foreach ($availableBatches as $batch) {
@@ -250,12 +250,14 @@ class PbFSystemSeeder extends Seeder
                         $paidAmount = fake()->randomFloat(2, $invoice->total_amount * 0.3, $invoice->total_amount * 0.7);
                     }
 
-                    Invoice::factory()->create([
+                    // --- INI ADALAH PERBAIKANNYA ---
+                    \App\Models\InvoicePayment::factory()->create([ // Pastikan pakai namespace lengkap atau `use App\Models\InvoicePayment;` di atas
                         'invoice_id' => $invoice->id,
                         'amount' => $paidAmount,
                         'received_by' => $salesUser->id,
                         'payment_date' => fake()->dateTimeBetween($invoice->invoice_date, 'now'),
                     ]);
+                    // --- AKHIR PERBAIKAN ---
                 }
             }
         }
