@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 
 
@@ -43,4 +43,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/master-obat', function () {
+    return view('master-obat', ['title' => 'Master Obat']);
+});

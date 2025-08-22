@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="text-gray-900 bg-gray-100">
@@ -27,6 +28,8 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
+    @vite('resources/js/app.js')
 </body>
 
 </html>
